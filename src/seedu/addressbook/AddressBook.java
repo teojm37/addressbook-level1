@@ -71,7 +71,8 @@ public class AddressBook {
 	private static final String MESSAGE_DISPLAY_PERSON_DATA = "%1$s  Phone Number: %2$s  Email: %3$s";
 	private static final String MESSAGE_DISPLAY_LIST_ELEMENT_INDEX = "%1$d. ";
 	private static final String MESSAGE_GOODBYE = "Exiting Address Book... Good bye!";
-	private static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format: %1$s " + LINE_SEPARATOR + "%2$s";
+	private static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format: %1$s " + LINE_SEPARATOR
+			+ "%2$s";
 	private static final String MESSAGE_INVALID_FILE = "The given file name [%1$s] is not a valid file name!";
 	private static final String MESSAGE_INVALID_PROGRAM_ARGS = "Too many parameters! Correct program argument format:"
 			+ LINE_SEPARATOR + "\tjava AddressBook" + LINE_SEPARATOR + "\tjava AddressBook [custom storage file path]";
@@ -132,27 +133,11 @@ public class AddressBook {
 	private static final String DIVIDER = "===================================================";
 
 	/*
-	 * We use a String array to store details of a single person. The constants
-	 * given below are the indexes for the different data elements of a person
-	 * used by the internal String[] storage format. For example, a person's
-	 * name is stored as the 0th element in the array.
-	 */
-	// private static final int PERSON_DATA_INDEX_NAME = 0;
-	// private static final int PERSON_DATA_INDEX_PHONE = 1;
-	// private static final int PERSON_DATA_INDEX_EMAIL = 2;
-
-	/*
-	 * Using HashMap to store individual's data
-	 */
-	// private static final String PERSON_PROPERTY_NAME = "name";
-	// private static final String PERSON_PROPERTY_PHONE = "phone";
-	// private static final String PERSON_PROPERTY_EMAIL = "email";
-
-	/*
-	 * We use a HashMap to store details of a single person. The enumerator defined
-	 * below give the keys for the different data elements of a person
-	 * used by the internal HashMap<PersonProperty,String> data structure. For example, a person's
-	 * name is stored in the HashMap with PersonProperty.NAME as the key.
+	 * We use a HashMap to store details of a single person. The enumerator
+	 * defined below give the keys for the different data elements of a person
+	 * used by the internal HashMap<PersonProperty,String> data structure. For
+	 * example, a person's name is stored in the HashMap with
+	 * PersonProperty.NAME as the key.
 	 */
 	private enum PersonProperty {
 		NAME, EMAIL, PHONE
@@ -232,7 +217,7 @@ public class AddressBook {
 
 	private static void executeMainLogic() {
 		String userCommand = getUserInput();
-		// echoUserCommand(userCommand);
+		echoUserCommand(userCommand);
 		String feedback = executeCommand(userCommand);
 		showResultToUser(feedback);
 	}
@@ -245,11 +230,11 @@ public class AddressBook {
 	 * ====================================================================
 	 */
 	private static void showWelcomeMessage() {
-		showToUser(new String[] {DIVIDER,DIVIDER,VERSION,MESSAGE_WELCOME,DIVIDER});
+		showToUser(new String[] { DIVIDER, DIVIDER, VERSION, MESSAGE_WELCOME, DIVIDER });
 	}
 
 	private static void showResultToUser(String result) {
-		showToUser(new String[] {result, DIVIDER});
+		showToUser(new String[] { result, DIVIDER });
 	}
 
 	/*
@@ -263,7 +248,7 @@ public class AddressBook {
 	 * Echoes the user input back to the user.
 	 */
 	private static void echoUserCommand(String userCommand) {
-		showToUser(new String[] {"[Command entered:" + userCommand + "]"});
+		showToUser(new String[] { "[Command entered:" + userCommand + "]" });
 	}
 
 	/*
@@ -284,7 +269,7 @@ public class AddressBook {
 	 */
 	private static void processProgramArgs(String[] args) {
 		if (args.length >= 2) {
-			showToUser(new String[] {MESSAGE_INVALID_PROGRAM_ARGS});
+			showToUser(new String[] { MESSAGE_INVALID_PROGRAM_ARGS });
 			exitProgram();
 		}
 
@@ -304,7 +289,7 @@ public class AddressBook {
 	private static void setupGivenFileForStorage(String filePath) {
 
 		if (!isValidFilePath(filePath)) {
-			showToUser(new String[] {String.format(MESSAGE_INVALID_FILE, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_INVALID_FILE, filePath) });
 			exitProgram();
 		}
 
@@ -316,7 +301,7 @@ public class AddressBook {
 	 * Displays the goodbye message and exits the runtime.
 	 */
 	private static void exitProgram() {
-		showToUser(new String[] {MESSAGE_GOODBYE, DIVIDER, DIVIDER});
+		showToUser(new String[] { MESSAGE_GOODBYE, DIVIDER, DIVIDER });
 		System.exit(0);
 	}
 
@@ -325,7 +310,7 @@ public class AddressBook {
 	 * Exits program if the file cannot be created.
 	 */
 	private static void setupDefaultFileForStorage() {
-		showToUser(new String[] {MESSAGE_USING_DEFAULT_FILE});
+		showToUser(new String[] { MESSAGE_USING_DEFAULT_FILE });
 		storageFilePath = DEFAULT_STORAGE_FILEPATH;
 		createFileIfMissing(storageFilePath);
 	}
@@ -659,7 +644,7 @@ public class AddressBook {
 	 */
 	private static void showToUser(ArrayList<HashMap<PersonProperty, String>> persons) {
 		String listAsString = getDisplayString(persons);
-		showToUser(new String[] {listAsString});
+		showToUser(new String[] { listAsString });
 		updateLatestViewedPersonListing(persons);
 	}
 
@@ -671,7 +656,8 @@ public class AddressBook {
 		for (int i = 0; i < persons.size(); i++) {
 			final HashMap<PersonProperty, String> person = persons.get(i);
 			final int displayIndex = i + DISPLAYED_INDEX_OFFSET;
-			messageAccumulator.append('\t').append(getIndexedPersonListElementMessage(displayIndex, person)).append(LINE_SEPARATOR);
+			messageAccumulator.append('\t').append(getIndexedPersonListElementMessage(displayIndex, person))
+					.append(LINE_SEPARATOR);
 		}
 		return messageAccumulator.toString();
 	}
@@ -750,13 +736,13 @@ public class AddressBook {
 			return;
 		}
 
-		showToUser(new String[] {String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath)});
+		showToUser(new String[] { String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath) });
 
 		try {
 			storageFile.createNewFile();
-			showToUser(new String[] {String.format(MESSAGE_STORAGE_FILE_CREATED, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_STORAGE_FILE_CREATED, filePath) });
 		} catch (IOException ioe) {
-			showToUser(new String[] {String.format(MESSAGE_ERROR_CREATING_STORAGE_FILE, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_ERROR_CREATING_STORAGE_FILE, filePath) });
 			exitProgram();
 		}
 	}
@@ -773,7 +759,7 @@ public class AddressBook {
 		final Optional<ArrayList<HashMap<PersonProperty, String>>> successfullyDecoded = decodePersonsFromStrings(
 				getLinesInFile(filePath));
 		if (!successfullyDecoded.isPresent()) {
-			showToUser(new String[] {MESSAGE_INVALID_STORAGE_FILE_CONTENT});
+			showToUser(new String[] { MESSAGE_INVALID_STORAGE_FILE_CONTENT });
 			exitProgram();
 		}
 		return successfullyDecoded.get();
@@ -789,10 +775,10 @@ public class AddressBook {
 		try {
 			lines = new ArrayList<String>(Files.readAllLines(Paths.get(filePath)));
 		} catch (FileNotFoundException fnfe) {
-			showToUser(new String[] {String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_ERROR_MISSING_STORAGE_FILE, filePath) });
 			exitProgram();
 		} catch (IOException ioe) {
-			showToUser(new String[] {String.format(MESSAGE_ERROR_READING_FROM_FILE, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_ERROR_READING_FROM_FILE, filePath) });
 			exitProgram();
 		}
 		return lines;
@@ -810,7 +796,7 @@ public class AddressBook {
 		try {
 			Files.write(Paths.get(storageFilePath), linesToWrite);
 		} catch (IOException ioe) {
-			showToUser(new String[] {String.format(MESSAGE_ERROR_WRITING_TO_FILE, filePath)});
+			showToUser(new String[] { String.format(MESSAGE_ERROR_WRITING_TO_FILE, filePath) });
 			exitProgram();
 		}
 	}
@@ -900,7 +886,6 @@ public class AddressBook {
 	 * @return person's name
 	 */
 	private static String getNameFromPerson(HashMap<PersonProperty, String> person) {
-		// return person[PERSON_DATA_INDEX_NAME];
 		return person.get(PersonProperty.NAME);
 	}
 
@@ -910,7 +895,6 @@ public class AddressBook {
 	 * @return person's phone number
 	 */
 	private static String getPhoneFromPerson(HashMap<PersonProperty, String> person) {
-		// return person[PERSON_DATA_INDEX_PHONE];
 		return person.get(PersonProperty.PHONE);
 	}
 
@@ -920,7 +904,6 @@ public class AddressBook {
 	 * @return person's email
 	 */
 	private static String getEmailFromPerson(HashMap<PersonProperty, String> person) {
-		// return person[PERSON_DATA_INDEX_EMAIL];
 		return person.get(PersonProperty.EMAIL);
 	}
 
@@ -937,9 +920,6 @@ public class AddressBook {
 	 */
 	private static HashMap<PersonProperty, String> makePersonFromData(String name, String phone, String email) {
 		final HashMap<PersonProperty, String> person = new HashMap<>();
-		// person[PERSON_DATA_INDEX_NAME] = name;
-		// person[PERSON_DATA_INDEX_PHONE] = phone;
-		// person[PERSON_DATA_INDEX_EMAIL] = email;
 		person.put(PersonProperty.NAME, name);
 		person.put(PersonProperty.PHONE, phone);
 		person.put(PersonProperty.EMAIL, email);
@@ -1110,9 +1090,6 @@ public class AddressBook {
 	 * @return whether the given person has valid data
 	 */
 	private static boolean isPersonDataValid(HashMap<PersonProperty, String> person) {
-		// return isPersonNameValid(person[PERSON_DATA_INDEX_NAME])
-		// && isPersonPhoneValid(person[PERSON_DATA_INDEX_PHONE])
-		// && isPersonEmailValid(person[PERSON_DATA_INDEX_EMAIL]);
 		return isPersonNameValid(person.get(PersonProperty.NAME))
 				&& isPersonPhoneValid(person.get(PersonProperty.PHONE))
 				&& isPersonEmailValid(person.get(PersonProperty.EMAIL));
@@ -1171,9 +1148,10 @@ public class AddressBook {
 	 * @return Usage info for all commands
 	 */
 	private static String getUsageInfoForAllCommands() {
-		return getUsageInfoForAddCommand() + LINE_SEPARATOR + getUsageInfoForFindCommand() + LINE_SEPARATOR + getUsageInfoForViewCommand() + LINE_SEPARATOR
-				+ getUsageInfoForDeleteCommand() + LINE_SEPARATOR + getUsageInfoForClearCommand() + LINE_SEPARATOR
-				+ getUsageInfoForExitCommand() + LINE_SEPARATOR + getUsageInfoForHelpCommand();
+		return getUsageInfoForAddCommand() + LINE_SEPARATOR + getUsageInfoForFindCommand() + LINE_SEPARATOR
+				+ getUsageInfoForViewCommand() + LINE_SEPARATOR + getUsageInfoForDeleteCommand() + LINE_SEPARATOR
+				+ getUsageInfoForClearCommand() + LINE_SEPARATOR + getUsageInfoForExitCommand() + LINE_SEPARATOR
+				+ getUsageInfoForHelpCommand();
 	}
 
 	/**

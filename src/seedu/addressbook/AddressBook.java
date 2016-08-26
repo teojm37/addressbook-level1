@@ -236,7 +236,10 @@ public class AddressBook {
 		loadDataFromStorage();
 		
 		while (true) {
-			executeMainLogic();
+			String userCommand = getUserInput();
+			// echoUserCommand(userCommand);
+			String feedback = executeCommand(userCommand);
+			showResultToUser(feedback);
 		}
 	}
 		

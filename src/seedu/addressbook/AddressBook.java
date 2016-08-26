@@ -33,11 +33,6 @@ import java.util.Set;
 public class AddressBook {
 
 	/**
-	 * Default file path used if the user doesn't provide the file name.
-	 */
-	private static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
-
-	/**
 	 * Version info of the program.
 	 */
 	private static final String VERSION = "AddessBook Level 1 - Version 1.0";
@@ -71,8 +66,6 @@ public class AddressBook {
 	private static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "%1$d persons found!";
 	private static final String MESSAGE_STORAGE_FILE_CREATED = "Created new empty storage file: %1$s";
 	private static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
-	private static final String MESSAGE_USING_DEFAULT_FILE = "Using default storage file : " + DEFAULT_STORAGE_FILEPATH;
-
 	// These are the prefix strings to define the data type of a command
 	// parameter
 	private static final String PERSON_DATA_PREFIX_PHONE = "p/";
@@ -234,10 +227,10 @@ public class AddressBook {
 		}
 		
 		if (args.length == 0) {
-			for (String m : new String[] {MESSAGE_USING_DEFAULT_FILE}) {
+			for (String m : new String[] {"Using default storage file : " + "addressbook.txt"}) {
 				System.out.println("|| " + m);
 			}
-			storageFilePath = DEFAULT_STORAGE_FILEPATH;
+			storageFilePath = "addressbook.txt";
 			createFileIfMissing(storageFilePath);
 		}
 		ALL_PERSONS.clear();

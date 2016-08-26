@@ -149,7 +149,10 @@ public class AddressBook {
 	// private static final String PERSON_PROPERTY_EMAIL = "email";
 
 	/*
-	 * Using Enum
+	 * We use a HashMap to store details of a single person. The enumerator defined
+	 * below give the keys for the different data elements of a person
+	 * used by the internal HashMap<PersonProperty,String> data structure. For example, a person's
+	 * name is stored in the HashMap with PersonProperty.NAME as the key.
 	 */
 	private enum PersonProperty {
 		NAME, EMAIL, PHONE
